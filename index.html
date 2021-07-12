@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+      .main {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="loading">
+      loading....
+    </div>
+    <div class="main" id="mainContain" hidden>
+      <img
+        src="https://media-exp1.licdn.com/dms/image/C4D03AQFavd6nlGQudA/profile-displayphoto-shrink_200_200/0/1575607323454?e=1628121600&v=beta&t=UdclSRMGIRzUGrVj2q207fzaZvDfo-YXxO-Rs3M-yoo"
+        height="100" width="100">
+      <h2 id="fullname"></h2>
+      <p id="bio"></p>
+      <h3 id="followerInfo"></h3>
+      <p>
+        check me on <a id="githublink">Github</a>
+      </p>
+      <h2>My Projects</h2>
+      <p id="githubrepos">
+
+      </p>
+
+    </div>
+    <script>
+      fetch( "https://api.github.com/users/Binita-subedi" )
+        .then( response => response.json() )
+        .then( function ( data ) {
+          console.log( data )
+          // document.getElementById( "profileImage" ).src = data["avatar_url"]
+
+          let biop = "keep calm and code on"
+          let followersCount = data["followers"];
+          let follower = `I have been followed by ${followersCount} followers`
+          document.getElementById( "fullname" ).textContent = data["login"]
+          document.getElementById( "bio" ).textContent = biop
+          document.getElementById( "githublink" ).href = ["html_url"]
+          document.getElementById( "followerInfo" ).textContent = follower
+          document.getElementById( "mainContain" ).hidden = false
+          document.getElementById( "loading" ).hidden = true
+        } )
+
+      fetch( "https://api.github.com/users/Binita-subedi/repos" )
+        .then( response => response.json() )
+        .then( function ( data ) {
+          console.log( data )
+          let n = data.length
+          console.log( n )
+          let reponames = "";
+
+          for ( i = 0; i < n; i++ ) {
+
+            reponames += data[i]["name"] + "<br>" + "<br>"
+          }
+          document.getElementById( "githubrepos" ).innerHTML = reponames
+
+
+
+
+        } )
+
+
+
+    </script>
+
+
+  </body>
+
+</html>
