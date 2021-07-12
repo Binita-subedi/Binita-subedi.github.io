@@ -45,7 +45,7 @@
           let follower = `I have been followed by ${followersCount} followers`
           document.getElementById( "fullname" ).textContent = data["login"]
           document.getElementById( "bio" ).textContent = biop
-          document.getElementById( "githublink" ).href = ["html_url"]
+          document.getElementById( "githublink" ).href = data["html_url"]
           document.getElementById( "followerInfo" ).textContent = follower
           document.getElementById( "mainContain" ).hidden = false
           document.getElementById( "loading" ).hidden = true
